@@ -32,7 +32,7 @@ shinyUI(fixedPage(
             actionButton("code", "Source Code", onclick ="window.open('https://github.com/edgartreischl', '_blank')", icon = icon("github"))
         ),
         
-        # Show a plot of the generated distribution
+
         # Show a plot of the generated distribution
         mainPanel(
             tabsetPanel(type = "tabs",
