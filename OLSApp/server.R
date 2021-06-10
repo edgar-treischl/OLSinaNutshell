@@ -10,6 +10,8 @@ library(shiny)
 library(ggplot2)
 library(readr)
 library(waiter)
+library(shinyWidgets)
+
 
 catholic <- read.csv("catholic.csv")
 
@@ -126,7 +128,7 @@ shinyServer(function(input, output, session) {
     summary(model())
   })
   
-  ### Total variance
+  #Total variance####
   output$total <- renderPlot({
     cols <- c("#619CFF", "#00BA38", "#F8766D")
     ggplot(Rawdata(), aes(x=x,y=y))+
@@ -144,7 +146,7 @@ shinyServer(function(input, output, session) {
   })
   
    
-  ### Explained Variance
+  ###Explained Variance####
   output$regression <- renderPlot({
     cols <- c("#619CFF", "#00BA38", "#F8766D")
     ggplot(Rawdata(), aes(x=x,y=y))+
@@ -230,19 +232,30 @@ shinyServer(function(input, output, session) {
   
 
 
-observeEvent(input$button2, {
-  toggle('text_div2')
-  output$text4 <- renderText({
-    paste("Don't let you fool by point estimates. 
-The estimates depend on the scale of the variables. 
-We have to look at the summary statistics to get an idea about the effect size.")
-  })
+
+observeEvent(input$coefinfo, {
+  show_alert(
+    title = NULL,
+    btn_labels = "Got it!",
+    btn_colors = "#008080",
+    text = tags$span(
+      tags$h3("Interpretation?", icon("lightbulb"),
+              style = "color: #008080;"),
+      "Don't let you fool by point estimates. The estimates depend on the scale
+      of the variables. We have to look at the summary statistics to get an idea
+      about the effect size."
+    ),
+    html = TRUE
+  )
 })
 
 
 
+
+
+
 #shinywidgets##########
-observeEvent(input$sw_html, {
+observeEvent(input$linearinfo, {
   show_alert(
     title = NULL,
     btn_labels = "Got it!",

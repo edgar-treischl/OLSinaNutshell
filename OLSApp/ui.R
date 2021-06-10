@@ -12,6 +12,7 @@ library(GGally)
 library(ggplot2)
 library(rmarkdown)
 library(waiter)
+library(shinyWidgets)
 
 library(shinyjs)
 
@@ -40,7 +41,9 @@ shinyUI(fixedPage(
     # Show a plot of the generated distribution
     mainPanel(
       tabsetPanel(type = "tabs",
-                  tabPanel("Start", icon = icon("play")
+                  tabPanel("Start", icon = icon("play"),
+                           includeMarkdown("txt/start.md")
+                           
                   ),
                   tabPanel("(1) Summary Statistics", icon = icon("calculator"),
                            includeMarkdown("txt/summary1.md"),
@@ -55,7 +58,7 @@ shinyUI(fixedPage(
                            plotOutput("scatter"),
                            h5("What would you say? Is there a linear association between X and Y?"),
                            actionButton(
-                             inputId = "sw_html",
+                             inputId = "linearinfo",
                              label = "Not linear?",
                              icon = icon("chart-line"))
                            ),
@@ -73,10 +76,10 @@ shinyUI(fixedPage(
                   tabPanel("(4) Plot it", icon = icon("area-chart"),
                            includeMarkdown("txt/plot.md"),
                            plotOutput("plot"),
-                           actionButton("button2", "Hint"),
-                           hidden(
-                             div(id='text_div2',
-                                 verbatimTextOutput("text4")))
+                           actionButton(
+                             inputId = "coefinfo",
+                             icon = icon("lightbulb"),
+                             label = "A hint?")
                            ),
                   tabPanel("(5) Datafit", icon = icon("hand-point-right"),
                            includeMarkdown("txt/datafit.md"),
