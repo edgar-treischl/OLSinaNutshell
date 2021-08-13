@@ -14,7 +14,7 @@ library(rmarkdown)
 library(waiter)
 library(shinyWidgets)
 
-library(shinyjs)
+#library(shinyjs)
 
 # Define UI for application that draws a histogram
 shinyUI(fixedPage(
@@ -34,7 +34,7 @@ shinyUI(fixedPage(
       downloadButton("report", "Download Summary"),
       br(),
       br(),
-      actionButton("code", "Source Code", onclick ="window.open('https://github.com/edgartreischl/OLSinaNutshell.git', '_blank')", icon = icon("github"))
+      actionButton("code", "Source Code", onclick ="window.open('https://github.com/edgar-treischl/OLSinaNutshell.git', '_blank')", icon = icon("github"))
     ),
     
 
