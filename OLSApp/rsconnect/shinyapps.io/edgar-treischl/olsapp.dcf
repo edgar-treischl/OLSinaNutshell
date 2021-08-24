@@ -1,0 +1,11 @@
+name: olsapp
+title:
+username:
+account: edgar-treischl
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4528527
+bundleId: 4958272
+url: https://edgar-treischl.shinyapps.io/olsapp/
+when: 1629813696.43843
+lastSyncTime: 1629813696.43844
