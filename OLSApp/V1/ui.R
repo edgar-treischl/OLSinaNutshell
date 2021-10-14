@@ -12,7 +12,6 @@ library(GGally)
 library(ggplot2)
 library(rmarkdown)
 library(waiter)
-library(shinyWidgets)
 
 #library(shinyjs)
 
@@ -34,7 +33,7 @@ shinyUI(fixedPage(
       downloadButton("report", "Download Summary"),
       br(),
       br(),
-      actionButton("code", "Source Code", onclick ="window.open('https://github.com/edgar-treischl/OLSinaNutshell.git', '_blank')", icon = icon("github"))
+      actionButton("code", "Source Code", onclick ="window.open('https://github.com/edgartreischl/OLSinaNutshell.git', '_blank')", icon = icon("github"))
     ),
     
 
@@ -42,8 +41,7 @@ shinyUI(fixedPage(
     mainPanel(
       tabsetPanel(type = "tabs",
                   tabPanel("Start", icon = icon("play"),
-                           includeMarkdown("start.md")
-                           
+                           includeMarkdown("txt/start.md")
                   ),
                   tabPanel("(1) Summary Statistics", icon = icon("calculator"),
                            includeMarkdown("txt/summary1.md"),
@@ -57,10 +55,10 @@ shinyUI(fixedPage(
                            includeMarkdown("txt/linear1.md"),
                            plotOutput("scatter"),
                            h5("What would you say? Is there a linear association between X and Y?"),
-                           actionButton(
-                             inputId = "linearinfo",
-                             label = "Not linear?",
-                             icon = icon("chart-line"))
+                           actionButton("button3", "Not linear?"),
+                           hidden(
+                             div(id='text_div3',
+                                 verbatimTextOutput("text5")))
                            ),
                   tabPanel("(3) Regression", icon = icon("rocket"),
                            includeMarkdown("txt/regression.md"),
@@ -68,18 +66,20 @@ shinyUI(fixedPage(
                            h5("Can you interpret the results? Can you calculate 
                               the predicted value if X increases by 1 unit?"),
                            withMathJax(helpText("Hint: $$y_i=\\beta_1+\\beta_2*x_i$$")),
-                           actionButton(
-                             inputId = "reginfo",
-                             icon = icon("lightbulb"),
-                             label = "More help?")
+                           actionButton("button1", "Another Hint?"),
+                           hidden(
+                             div(id='text_div1',
+                                 verbatimTextOutput("text1"),
+                                 verbatimTextOutput("text2"),
+                                 verbatimTextOutput("text3")))
                            ),
                   tabPanel("(4) Plot it", icon = icon("area-chart"),
                            includeMarkdown("txt/plot.md"),
                            plotOutput("plot"),
-                           actionButton(
-                             inputId = "coefinfo",
-                             icon = icon("lightbulb"),
-                             label = "A hint?")
+                           actionButton("button2", "Hint"),
+                           hidden(
+                             div(id='text_div2',
+                                 verbatimTextOutput("text4")))
                            ),
                   tabPanel("(5) Datafit", icon = icon("hand-point-right"),
                            includeMarkdown("txt/datafit.md"),
